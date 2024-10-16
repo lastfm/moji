@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012-2017 Last.fm & The "mogilefs-moji" committers
+ * Copyright (C) 2012-2024 Last.fm & The "mogilefs-moji" committers
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.IOException;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -37,7 +38,7 @@ public class DefaultFileNamingStrategyTest {
   private DefaultFileNamingStrategy namingStrategy;
 
   @Before
-  public void setUp() {
+  public void setUp() throws IOException {
     folder = testFolder.newFolder("local-moji");
     namingStrategy = new DefaultFileNamingStrategy(folder);
   }
@@ -55,7 +56,7 @@ public class DefaultFileNamingStrategyTest {
   }
 
   @Test
-  public void fileNameFilter() {
+  public void fileNameFilter() throws IOException {
     File anotherFolder = testFolder.newFolder("some-other-folder");
     FilenameFilter filter = namingStrategy.filterForPrefix("lastfm", "100");
     assertTrue(filter.accept(folder, "lastfm-1003848737.dat"));
